@@ -37,15 +37,26 @@ class SuccessesPoll(Poll):
         self.extra_success_threshold = extra_success_threshold
         super(SuccessesPoll, self).__init__(dices_list)
 
-    def successes(self):
+    def _check_die_successes(self, dice: Dice):
         successes = 0
-        for dice in self.poll:
-            if dice.result >= self.success_threshold:
-                successes += 1
-                if self.extra_success_threshold:
-                    new_success_threshold = self.success_threshold + self.extra_success_threshold
-                    while new_success_threshold <= dice.sides:
-                        if dice.result >= new_success_threshold:
-                            successes += 1
-                        new_success_threshold += self.extra_success_threshold
+        if dice.result >= self.success_threshold:
+            successes += 1
+            if self.extra_success_threshold:
+                new_success_threshold = self.success_threshold + self.extra_success_threshold
+                while new_success_threshold <= dice.sides:
+                    if dice.result >= new_success_threshold:
+                        successes += 1
+                    new_success_threshold += self.extra_success_threshold
         return successes
+
+    def successes(self, force=False):
+        successes = 0
+        ones = 0
+        for dice in self.poll:
+            successes += self._check_die_successes(dice)
+            if force and 1 < dice.result < self.success_threshold:
+                dice.roll()
+                successes += self._check_die_successes(dice)
+            if 1 == dice.result:
+                ones += 1
+        return successes, ones
