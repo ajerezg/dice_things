@@ -1,5 +1,11 @@
 Some classes to use as dice rollers.
-Main use: `python main.py -roll 1-10d6s4e2f`
+
+
+
+## General Success Roller general_success_roller
+This command rolls a general version of the success system rolling pools of the same side dice.
+
+Main use: `python general_success_roller.py -roll 1-10d6s4e2f`
 - 1-10d6: roll 1 to 10 die of 6 sides.
 - s4: success threshold of 4+
 - e2: count 1 success more for each +2 over success threshold
@@ -22,3 +28,9 @@ Dice sides: 6   Success threshold: 4    Extra success threshold: 2      Times ro
 |        10 | 100.0% - 2.22 | 99.97% - 2.22 | 99.83% - 2.22 | 99.2% - 2.22  | 97.37% - 2.22 | 92.9% - 2.22  | 84.69% - 2.22 | 72.18% - 2.22 | 56.35% - 2.22 | 39.55% - 2.22 |
 
 ```
+
+
+## TBA roller tba_roller
+This command rolls a dice system like the twilight 2000 but different...
+
+Main use: `python tba_roller.py -roll all`

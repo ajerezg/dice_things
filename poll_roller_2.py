@@ -3,12 +3,12 @@ import argparse
 
 from tabulate import tabulate
 
-from dice_classes import Dice, Poll, SuccessesPoll
+from dice_classes import Dice, Poll, SuccessesPoll, SuccessesPoll2
 
 REPEAT = 100000
 
 
-def dice_roller_twilight_like(dice_str):
+def general_success_dice_roller(dice_str):
     quantity = dice_str.split("d")[0]
     q_range = []
     if '-' in quantity:
@@ -22,17 +22,15 @@ def dice_roller_twilight_like(dice_str):
         dice_str = dice_str[:-1]
     sides = int(dice_str.split("d")[1].split("s")[0])
     success = int(dice_str.split("d")[1].split("s")[1].split("e")[0])
-    extra = int(dice_str.split("d")[1].split("s")[1].split("e")[1])
 
-    print("Dice sides: {}\tSuccess threshold: {}\tExtra success threshold: {}\tTimes rolled: {}".format(
-        sides, success, extra, REPEAT))
-    header = ["# dices", "1+ - ones", "2+ - ones", "3+ - ones", "4+ - ones", "5+ - ones", "6+ - ones",
-              "7+ - ones", "8+ - ones", "9+ - ones", "10+ - ones"]
+    print(f"Dice sides: {sides}\tSuccess threshold: {success}\tTimes rolled: {REPEAT}")
+    header = ["# dices", "1+ - failures", "2+ - failures", "3+ - failures", "4+ - failures", "5+ - failures", "6+ - failures",
+              "7+ - failures", "8+ - failures", "9+ - failures", "10+ - failures"]
     results = []
     for dices in range(q_range[0], q_range[1]+1):
         successes_list = [0 for i in range(10)]
         ones_list = [0 for i in range(10)]
-        poll = SuccessesPoll([], success, extra)
+        poll = SuccessesPoll2([], success)
         for dice in range(1, dices+1):
             dice = Dice(sides)
             poll.add_dice(dice)
@@ -52,7 +50,7 @@ def dice_roller_twilight_like(dice_str):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate percentage of successes for dice rolled")
-    parser.add_argument('-roll', help="<dice-range>d<sides>s<success_threshold>e<extra_successes_threshold> -> 1-6d6s6e2")
+    parser.add_argument('-roll', help="<dice-range>d<sides>s<success_threshold><f> -> 1-6d6s6 or 1-6d6s6f")
     args = parser.parse_args()
 
-    dice_roller_twilight_like(args.roll)
+    general_success_dice_roller(args.roll)

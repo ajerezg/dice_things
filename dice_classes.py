@@ -7,7 +7,10 @@ class Dice:
         self.result = None
 
     def roll(self):
-        self.result = random.randint(1, self.sides)
+        if self.sides == 0:
+            self.result = 0
+        else:
+            self.result = random.randint(1, self.sides)
         return self.result
 
     def reset_roll(self):
@@ -29,6 +32,19 @@ class Poll:
 
     def add_dice(self, dice):
         self.poll.append(dice)
+
+
+class TBAPoll(Poll):
+    def roll(self):
+        super(TBAPoll, self).roll()
+        max = 0
+        ones = 0
+        for dice in self.poll:
+            if dice.result > max :
+                max = dice.result
+            if dice.result == 1:
+                ones += 1
+        return max, ones
 
 
 class SuccessesPoll(Poll):
@@ -60,3 +76,18 @@ class SuccessesPoll(Poll):
             if 1 == dice.result:
                 ones += 1
         return successes, ones
+
+
+class SuccessesPoll2(SuccessesPoll):
+    def successes(self, force=False):
+        successes = 0
+        failures = 0
+        for dice in self.poll:
+            successes += self._check_die_successes(dice)
+            if force and dice.result < self.success_threshold:
+                dice.roll()
+                successes += self._check_die_successes(dice)
+            if dice.result < self.success_threshold:
+                failures += 1
+        return successes, failures
+
