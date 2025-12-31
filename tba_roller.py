@@ -4,7 +4,7 @@ import argparse
 
 from tabulate import tabulate
 
-from dice_classes import Dice, Poll, SuccessesPoll, TBAPoll
+from dice_classes import Dice, Pool, SuccessesPool, TBAPool
 
 REPEAT = 100000
 
@@ -37,9 +37,9 @@ def tba_roller(dice_str):
         result_list = [0 for i in range(12)]
         ones_list = [0 for i in range(12)]
         results_for_avg = list()
-        poll = TBAPoll([Dice(RANK_SIDE_DICT[pair[0]]), Dice(RANK_SIDE_DICT[pair[1]])])
+        pool = TBAPool([Dice(RANK_SIDE_DICT[pair[0]]), Dice(RANK_SIDE_DICT[pair[1]])])
         for i in range(REPEAT):
-            successes, ones = poll.roll()
+            successes, ones = pool.roll()
             results_for_avg.append(successes)
             for s in range(1, 13):
                 if successes >= s:

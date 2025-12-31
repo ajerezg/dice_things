@@ -3,7 +3,7 @@ import argparse
 
 from tabulate import tabulate
 
-from dice_classes import Dice, Poll, SuccessesPoll, SuccessesPoll2
+from dice_classes import Dice, Pool, SuccessesPool, SuccessesPool2
 
 REPEAT = 100000
 
@@ -30,13 +30,13 @@ def general_success_dice_roller(dice_str):
     for dices in range(q_range[0], q_range[1]+1):
         successes_list = [0 for i in range(10)]
         ones_list = [0 for i in range(10)]
-        poll = SuccessesPoll2([], success)
+        pool = SuccessesPool2([], success)
         for dice in range(1, dices+1):
             dice = Dice(sides)
-            poll.add_dice(dice)
+            pool.add_dice(dice)
         for i in range(REPEAT):
-            poll.roll()
-            successes, ones = poll.successes(force=force)
+            pool.roll()
+            successes, ones = pool.successes(force=force)
             for s in range(1, 11):
                 if successes >= s:
                     successes_list[s-1] += 1
