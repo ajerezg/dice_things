@@ -32,7 +32,7 @@ def roller(dice_str="1-4d6vs1-4d6"):
     quantity_range_2, dice_sides_2 = parse_dice_str(defender_str)
     
     print(f"Attacker: {attacker_str}\tDefender: {defender_str}")
-    header = ["ATK vs DEF", "%ATK WIN", "%DEF WIN"]
+    header = ["ATK vs DEF", "ATK WIN %"]
     results = []
     for atk_dice_quantity in range(quantity_range_1[0], quantity_range_1[1]+1):
         atk_pool = set_pool(atk_dice_quantity, dice_sides_1)
@@ -44,14 +44,12 @@ def roller(dice_str="1-4d6vs1-4d6"):
                 def_pool.roll()
                 if atk_pool.get_result() > def_pool.get_result():
                     atk_win_count += 1
-            atk_win_percentage = round(atk_win_count*100/REPEAT, 2)
-            def_win_percentage = round(100 - atk_win_percentage, 2)
+            atk_win_percentage = round(atk_win_count*100/REPEAT,1)
             results.append([
                 f"{atk_dice_quantity}d{dice_sides_1}vs{def_dice_quantity}d{dice_sides_2}",
                 f"{atk_win_percentage}%",
-                f"{def_win_percentage}%",
                 ])
-    print(tabulate(results, headers=header, tablefmt="orgtbl"))
+    print(tabulate(results, headers=header, tablefmt="tsv"))
 
 
 if __name__ == "__main__":
