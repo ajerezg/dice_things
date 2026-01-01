@@ -34,3 +34,31 @@ Dice sides: 6   Success threshold: 4    Extra success threshold: 2      Times ro
 This command rolls a dice system like the twilight 2000 but different...
 
 Main use: `python tba_roller.py -roll all`
+
+## Best of Pool roller best_of_pool_roller
+This command is an opposed roll of an attacker and a defender, with each one choosing the highest number rolled. Defense wins draws.
+- The results table shows only one opposed roll for now. It should implement the options to choose the best of N rolls.
+
+Main use: `python best_of_pool_roller.py`
+
+Result for previous example:
+```
+Attacker: 1-4d6 Defender: 1-4d6
+ATK vs DEF      ATK WIN %
+1d6vs1d6        41.7%    
+1d6vs2d6        25.8%    
+1d6vs3d6        17.5%    
+1d6vs4d6        12.5%    
+2d6vs1d6        58.2%    
+2d6vs2d6        39.0%    
+2d6vs3d6        28.2%    
+2d6vs4d6        21.0%    
+3d6vs1d6        65.9%    
+3d6vs2d6        47.2%    
+3d6vs3d6        35.2%    
+3d6vs4d6        27.2%    
+4d6vs1d6        70.7%    
+4d6vs2d6        52.8%    
+4d6vs3d6        40.3%    
+4d6vs4d6        31.7%
+```
