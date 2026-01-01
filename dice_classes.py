@@ -18,7 +18,7 @@ class Dice:
 
 
 class Pool:
-    def __init__(self, dices_list=[]):
+    def __init__(self, dices_list):
         self.pool = dices_list
 
     def roll(self):
@@ -32,6 +32,11 @@ class Pool:
 
     def add_dice(self, dice):
         self.pool.append(dice)
+
+
+class BestOfPool(Pool):
+    def get_result(self):
+        return max(dice.result for dice in self.pool)
 
 
 class TBAPool(Pool):
