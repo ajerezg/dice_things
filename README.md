@@ -37,28 +37,31 @@ Main use: `python tba_roller.py -roll all`
 
 ## Best of Pool roller best_of_pool_roller
 This command is an opposed roll of an attacker and a defender, with each one choosing the highest number rolled. Defense wins draws.
-- The results table shows only one opposed roll for now. It should implement the options to choose the best of N rolls.
+The results shows the best of three win percentage of the attacker vs the defender with different "skills":
+
+- WIN%_vs_DEF_: Normal roll for the defense.
+- ODD+1: +1 to the dice with odd values.
 
 Main use: `python best_of_pool_roller.py`
 
 Result for previous example:
 ```
 Attacker: 1-4d6 Defender: 1-4d6
-ATK vs DEF      ATK WIN %
-1d6vs1d6        41.7%    
-1d6vs2d6        25.8%    
-1d6vs3d6        17.5%    
-1d6vs4d6        12.5%    
-2d6vs1d6        58.2%    
-2d6vs2d6        39.0%    
-2d6vs3d6        28.2%    
-2d6vs4d6        21.0%    
-3d6vs1d6        65.9%    
-3d6vs2d6        47.2%    
-3d6vs3d6        35.2%    
-3d6vs4d6        27.2%    
-4d6vs1d6        70.7%    
-4d6vs2d6        52.8%    
-4d6vs3d6        40.3%    
-4d6vs4d6        31.7%
+ATK vs DEF      WIN%_vs_DEF_    WIN%_vs_DEF_ODD+1
+1d6vs1d6        37.7%           26.0%
+1d6vs2d6        16.2%           9.1%
+1d6vs3d6        8.1%            3.5%
+1d6vs4d6        4.3%            1.4%
+2d6vs1d6        61.7%           47.2%
+2d6vs2d6        33.9%           19.6%
+2d6vs3d6        19.3%           8.3%
+2d6vs4d6        11.4%           3.6%
+3d6vs1d6        73.1%           58.4%
+3d6vs2d6        46.0%           27.2%
+3d6vs3d6        28.7%           12.2%
+3d6vs4d6        18.1%           5.5%
+4d6vs1d6        79.3%           64.3%
+4d6vs2d6        54.0%           32.0%
+4d6vs3d6        35.8%           15.1%
+4d6vs4d6        23.4%           7.0%
 ```
