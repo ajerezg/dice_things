@@ -7,7 +7,7 @@ from tabulate import tabulate
 from dice_classes import BestOfPool, Dice, Pool, SuccessesPool, TBAPool
 
 REPEAT = 100000
-
+BEST_OF = 3
 
 def parse_dice_str(dice_str:str):
     # 1-4d6 -> ([1, 4], 6)
@@ -40,9 +40,16 @@ def roller(dice_str="1-4d6vs1-4d6"):
             def_pool = set_pool(def_dice_quantity, dice_sides_2)
             atk_win_count = 0
             for i in range(REPEAT):
-                atk_pool.roll()
-                def_pool.roll()
-                if atk_pool.get_result() > def_pool.get_result():
+                atk_roll_win_count = 0
+                def_roll_win_count = 0
+                for j in range(BEST_OF):
+                    atk_pool.roll()
+                    def_pool.roll()
+                    if atk_pool.get_result() > def_pool.get_result():
+                        atk_roll_win_count += 1
+                    else:
+                        def_roll_win_count += 1
+                if atk_roll_win_count > def_roll_win_count:
                     atk_win_count += 1
             atk_win_percentage = round(atk_win_count*100/REPEAT,1)
             results.append([
