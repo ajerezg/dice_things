@@ -35,8 +35,28 @@ class Pool:
 
 
 class BestOfPool(Pool):
+    func_names = ["get_result", "get_result_odd_plus_one"]
+    func_readable_names = ["", "ODD+1"]
+
     def get_result(self):
         return max(dice.result for dice in self.pool)
+    
+    def get_result_odd_plus_one(self):
+        new_results = []
+        for dice in self.pool:
+            if dice.result % 2:
+                new_results.append(dice.result + 1)
+            else:
+                new_results.append(dice.result)
+        return max(new_results)
+    
+    @classmethod
+    def get_func_names(self):
+        return self.func_names
+
+    @classmethod
+    def get_func_readable_names(self):
+        return self.func_readable_names
 
 
 class TBAPool(Pool):
