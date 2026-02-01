@@ -15,6 +15,9 @@ class Dice:
 
     def reset_roll(self):
         self.result = None
+    
+    def get_reroll(self):
+        return random.randint(1, self.sides)
 
 
 class Pool:
@@ -35,9 +38,9 @@ class Pool:
 
 
 class BestOfPool(Pool):
-    func_names = ["get_result", "get_result_odd_plus_one"]
-    func_readable_names = ["STDR", "ODD+1"]
-    func_command_names = ["standar", "odd+1"]
+    func_names = ["get_result", "get_result_odd_plus_one", "get_result_min_three", "get_result_reroll_ones"]
+    func_readable_names = ["STDR", "ODD+1", "MIN=3", "RRL=1"]
+    func_command_names = ["standar", "odd+1", "min=3", "rrl=1"]
 
     def get_result(self):
         return max(dice.result for dice in self.pool)
@@ -47,6 +50,24 @@ class BestOfPool(Pool):
         for dice in self.pool:
             if dice.result % 2:
                 new_results.append(dice.result + 1)
+            else:
+                new_results.append(dice.result)
+        return max(new_results)
+    
+    def get_result_min_three(self):
+        new_results = []
+        for dice in self.pool:
+            if dice.result < 3:
+                new_results.append(3)
+            else:
+                new_results.append(dice.result)
+        return max(new_results)
+    
+    def get_result_reroll_ones(self):
+        new_results = []
+        for dice in self.pool:
+            if dice.result == 1:
+                new_results.append(dice.get_reroll())
             else:
                 new_results.append(dice.result)
         return max(new_results)
