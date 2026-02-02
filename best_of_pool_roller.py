@@ -38,7 +38,7 @@ def set_pool(dice_quantity:int, dice_sides:int):
         pool.add_dice(dice)
     return pool
 
-def roller(dice_str=f"1-4d6|allvs1-4d6{DICE_SKILL_SEPARATOR}{DICE_SKILL_ALL}"):
+def roller(dice_str=f"1-4d6|vs1-4d6{DICE_SKILL_SEPARATOR}{DICE_SKILL_ALL}"):
     attacker_str = dice_str.split("vs")[0]
     defender_str = dice_str.split("vs")[1]
     quantity_range_1, dice_sides_1, skill_list_1 = parse_dice_str(attacker_str)
@@ -91,4 +91,7 @@ def roller(dice_str=f"1-4d6|allvs1-4d6{DICE_SKILL_SEPARATOR}{DICE_SKILL_ALL}"):
 
 
 if __name__ == "__main__":
-    roller()
+    parser = argparse.ArgumentParser(description="Generate percentage of successes for dice rolled")
+    parser.add_argument('-roll', help="<dice-range>d<sides>[|<skill>,]vs<dice-range>d<sides>[|<skill>,] -> 1-4d6vs1-4d6|all")
+    args = parser.parse_args()
+    roller(args.roll)

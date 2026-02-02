@@ -37,31 +37,34 @@ Main use: `python tba_roller.py -roll all`
 
 ## Best of Pool roller best_of_pool_roller
 This command is an opposed roll of an attacker and a defender, with each one choosing the highest number rolled. Defense wins draws.
-The results shows the best of three win percentage of the attacker vs the defender with different "skills":
+The results shows the best of three win percentage of the attacker vs the defender both with different "skills":
 
-- WIN%_vs_DEF_: Normal roll for the defense.
-- ODD+1: +1 to the dice with odd values.
+- [all] Run the atacker/defender with all the available skills, one at the time.
+- [""][standar] STDR: Standar roll.
+- [odd+1] ODD+1: +1 to the dice with odd values.
+- [min=3] MIN=3: minimum value of the dice is always 3.
+- [rrl=1] RRL=1: dice with value 1 can be rerolled once.
 
-Main use: `python best_of_pool_roller.py`
+Main use: `python best_of_pool_roller.py -roll "1-4d6vs1-4d6|all"`
 
 Result for previous example:
 ```
-Attacker: 1-4d6 Defender: 1-4d6
-ATK vs DEF      WIN%_vs_DEF_    WIN%_vs_DEF_ODD+1
-1d6vs1d6        37.7%           26.0%
-1d6vs2d6        16.2%           9.1%
-1d6vs3d6        8.1%            3.5%
-1d6vs4d6        4.3%            1.4%
-2d6vs1d6        61.7%           47.2%
-2d6vs2d6        33.9%           19.6%
-2d6vs3d6        19.3%           8.3%
-2d6vs4d6        11.4%           3.6%
-3d6vs1d6        73.1%           58.4%
-3d6vs2d6        46.0%           27.2%
-3d6vs3d6        28.7%           12.2%
-3d6vs4d6        18.1%           5.5%
-4d6vs1d6        79.3%           64.3%
-4d6vs2d6        54.0%           32.0%
-4d6vs3d6        35.8%           15.1%
-4d6vs4d6        23.4%           7.0%
+Attacker: 1-4d6 Defender: 1-4d6|all
+ATK vs DEF      STDR_vs_STDR    STDR_vs_ODD+1   STDR_vs_MIN=3   STDR_vs_RRL=1
+1d6vs1d6        37.76%          25.97%          25.78%          27.7%
+1d6vs2d6        16.29%          8.75%           13.65%          11.04%
+1d6vs3d6        7.56%           3.33%           7.07%           5.12%
+1d6vs4d6        4.16%           1.27%           4.06%           2.58%
+2d6vs1d6        62.16%          47.22%          52.94%          52.5%
+2d6vs2d6        33.81%          19.6%           31.37%          25.57%
+2d6vs3d6        19.0%           8.44%           18.26%          13.7%
+2d6vs4d6        11.3%           3.59%           11.18%          6.98%
+3d6vs1d6        73.7%           58.66%          68.75%          65.62%
+3d6vs2d6        45.15%          26.41%          43.45%          36.89%
+3d6vs3d6        27.84%          11.61%          27.41%          21.16%
+3d6vs4d6        17.61%          5.16%           17.52%          12.2%
+4d6vs1d6        79.57%          65.43%          77.31%          73.11%
+4d6vs2d6        53.32%          32.2%           52.43%          44.63%
+4d6vs3d6        36.63%          15.38%          36.4%           28.66%
+4d6vs4d6        23.71%          7.2%            23.64%          17.15%
 ```
